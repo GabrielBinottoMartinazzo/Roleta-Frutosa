@@ -1,14 +1,15 @@
-import random
-import os
-import unicodedata
-import pyfiglet
+import random  # Para gerar itens aleatóriamente
+import os  # Para interagir com o sistema operacional
+import unicodedata  # Para palavras com acentuação
+import pyfiglet  # Para fontes personalizadas, é necessária a instalação por pip
 
 
 def remover_acentos(texto):
+    # Função responsável por remover acentos em textos definidos
     return unicodedata.normalize('NFKD', texto).encode('ASCII', 'ignore').decode('ASCII')
 
 
-opcoes = ['🍇', '🍊', '🍎']
+opcoes = ['🍇', '🍊', '🍎']  # Opções para o jogo da roleta
 saldo = 20  # Saldo inicial
 
 
@@ -16,8 +17,9 @@ def limpar():
     print('\n' * 50)
 
 
+# Opções para o jogo do Caça Níquel
 simbolos = ['🍒', '🍋', '🔔', '⭐', '💎', '7️⃣']
-pesos = [30,   25,   20,   15,   7,    3]
+pesos = [30,   25,   20,   15,   7,    3]  # Peso de cada opção
 
 multiplicadores = {
     ('🍒', '🍒', '🍒'): (2,  'TRINCA DE CEREJAS!'),
@@ -30,16 +32,18 @@ multiplicadores = {
 
 
 def caca_niquel():
+    # Função responsável pelo jogo Caça Níquel
     global saldo
 
     while True:
         limpar()
         print('\nCAÇA-NÍQUEL')
-        print('Combine três símbolos iguais para ganhar!\n')
+        print('Combine três símbolos iguais para ganhar!\n')  # Menu principal
         print(f'Saldo atual: R${saldo},00')
 
         if saldo < 10:
             print('Saldo insuficiente para jogar (mínimo R$10,00).')
+            # Processamento
             input('Pressione enter para retornar ao menu principal ')
             break
 
@@ -86,12 +90,14 @@ def caca_niquel():
 
 
 def roleta():
+    # Função responsável pelo jogo da roleta
     global saldo
 
     while True:
         limpar()
         escolh_maquina = random.choices(opcoes, k=3)
         print('\nROLETA FRUTOSA')
+        # Menu Principal
         print('Seu objetivo é alcançar o combo de três frutas!\n')
         print(f'Saldo atual: {saldo},00 reais')
         print('Obs: Cada jogada custa um total de 10 reais.')
@@ -108,35 +114,37 @@ def roleta():
             if len(set(escolh_maquina)) == 1:
                 saldo += 10
                 print(
+                    # Ganho
                     f"🎉 TRINCA! Você ganhou 10 reais! Saldo atual: R${saldo},00")
                 input('Pressione enter para retornar ao menu principal ')
             else:
-                print(f'Você perdeu 2 reais, Saldo: R${saldo},00')
+                print(f'Você perdeu 2 reais, Saldo: R${saldo},00')  # Perda
                 input('Pressione enter para retornar ao menu principal ')
                 break
-        elif iniciar == 'nao':
+        elif iniciar == 'nao':  # Opção
             print('Você saiu.')
             input('Pressione enter para retornar ao menu principal ')
             break
         else:
-            print('Opção inválida! Digite sim ou não.')
+            print('Opção inválida! Digite sim ou não.')  # Entrada Inválida
             input('Presione enter para tentar novamente ')
             continue
 
 
 def consultar_saldo():
+    # Função responsável por consultar saldo do usuário
     global saldo
     limpar()
     print('Consultando saldo..\n')
     print(f'O seu saldo é de: R${saldo:.2f} reais.\n')
     print('1. Adicionar saldo')
-    print('-----------')
+    print('-----------')  # Menu Principal
     print('2. Sacar saldo')
     print('-----------')
     print('3. Retornar ao menu\n')
     escolha_saldo = input(
         'Selecione qual opção você deseja: ').lower().strip()
-    if escolha_saldo == '1' or escolha_saldo == 'adicionar saldo':
+    if escolha_saldo == '1' or escolha_saldo == 'adicionar saldo':  # Adiciona saldo
         try:
             limpar()
             deposito = float(
@@ -151,7 +159,7 @@ def consultar_saldo():
                 input('Pressione enter para retornar ao menu principal')
         except ValueError:
             print('Valor inválido, insira apenas números.')
-    elif escolha_saldo == '2' or escolha_saldo == 'sacar saldo':
+    elif escolha_saldo == '2' or escolha_saldo == 'sacar saldo':  # Saca Saldo
         try:
             limpar()
             print(f'\nSeu saldo atual é de: R${saldo} reais\n')
@@ -166,31 +174,32 @@ def consultar_saldo():
                 input('Pressione enter para retornar ao menu principal ')
         except ValueError:
             print('Valor inválido, insira apenas números')
-    elif escolha_saldo == '3' or escolha_saldo == 'retornar ao menu':
+    elif escolha_saldo == '3' or escolha_saldo == 'retornar ao menu':  # Retorna ao menu principal
         limpar()
         main()
 
 
 def interface():
+    # Função responsável por mostrar a interface
     while True:
         limpar()
         print(pyfiglet.figlet_format('Cassino', font='slant'))
         print('\nMenu Principal\n')
         print('1. Jogar Roleta')
-        print('2. Jogar Caça níquel')
+        print('2. Jogar Caça níquel')  # Menu Principal
         print('3. Consultar Saldo')
         print('4. Sair')
         inicio = input('Selecione qual opção você deseja: ').lower().strip()
-        if inicio == '1' or inicio == 'jogar roleta':
+        if inicio == '1' or inicio == 'jogar roleta':  # Opção que entra no jogo da roleta
             if saldo >= 2:
                 roleta()
             else:
                 print('Você não possui saldo suficiente.')
-        elif inicio == '2' or inicio == 'jogar caca niquel':
+        elif inicio == '2' or inicio == 'jogar caca niquel':  # Opção que entra no jogo do Caça Níquel
             caca_niquel()
-        elif inicio == '3' or inicio == 'consultar saldo':
+        elif inicio == '3' or inicio == 'consultar saldo':  # Opção que entra para consulta de saldo
             consultar_saldo()
-        elif inicio == '4' or inicio == 'sair':
+        elif inicio == '4' or inicio == 'sair':  # Opção que sai do programa
             limpar()
             print('Você saiu.')
             break
@@ -199,6 +208,7 @@ def interface():
 
 
 def main():
+    # Função main para chamar o programa
     while True:
         interface()
         limpar()
