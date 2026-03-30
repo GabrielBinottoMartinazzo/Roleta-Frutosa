@@ -1,6 +1,6 @@
 # 🎰 Roleta Frutosa
 
-Jogo de caça-níquel no terminal desenvolvido em Python. Tente a sorte e acerte a trinca de frutas para ganhar!
+Jogo de cassino no terminal desenvolvido em Python. Tente a sorte e acerte as trincas de frutas/símbolos para ganhar!
 
 ---
 
@@ -9,7 +9,7 @@ Jogo de caça-níquel no terminal desenvolvido em Python. Tente a sorte e acerte
 1. Clone o repositório
 2. Execute o arquivo principal
 3. Escolha uma opção no menu
-4. Aposte 2 reais por rodada e torça pela trinca!
+4. Aposte quanto quiser por rodada e torça pelas trincas!
 ```bash
 git clone git@github.com:GabrielBinottoMartinazzo/Roleta-Frutosa.git
 cd Roleta-Frutosa
@@ -20,9 +20,9 @@ python main.py
 
 ## ⚙️ Funcionalidades
 
-- 🎰 Roleta com frutas aleatórias
+- 🎰 Roleta com frutas/símbolos aleatórias
 - 💰 Sistema de saldo e apostas
-- 🏆 Prêmio de R$10 na trinca
+- 🏆 Prêmios de acordo com a jogada
 - 📋 Menu interativo no terminal
 
 ---
